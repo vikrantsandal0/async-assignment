@@ -13,6 +13,7 @@ exports.getUserDataAwait = getUserDataAwait;
 exports.getUserDataCoroutine = getUserDataCoroutine;
 exports.getUserDataPromise = getUserDataPromise;
 exports.readFsPromisify    = readFsPromisify;
+exports.setImmediate      = setImmediate;
 
 
 
@@ -139,6 +140,9 @@ function getUserDataCoroutine(req, res) {
       message: commonConfig.responseMessages.SUCCESS,
       status: commonConfig.responseFlags.SUCCESS,
       data: userData
+
+
+
     };
 
   })().then((data) => {
@@ -175,7 +179,7 @@ function getUserDataPromise(req, res) {
 }
 
 function readFsPromisify(req, res){
-
+   console.log(req.body);
   var fs = Promise.promisifyAll(require("fs")); 
   var directory = "content";
   
@@ -191,7 +195,7 @@ function readFsPromisify(req, res){
   }).then(function (content) {
      let data ={
        content: content
-       
+
      };
      return  responses.sendCustomResponse(res, commonConfig.responseMessages.SUCCESS, commonConfig.responseFlags.SUCCESS, data);
 
@@ -201,11 +205,34 @@ function readFsPromisify(req, res){
 
   })
 
-
-
-
-
-
-
 }
 
+
+/**
+ * nextTick is called at the end of the current operation and
+ *  calling it recursively can end up blocking the event loop from continuing. 
+ * 
+ * setImmediate solves this by firing in the check phase of the event loop, 
+ * allowing event loop to continue normally.Hence this shows the importance of setImmediate
+ * 
+ * 
+ */
+
+function setImmediate(){
+  function step(iteration) {
+    if (iteration === 10) 
+    return responses.sendCustomResponse(res, commonConfig.responseMessages.SUCCESS, commonConfig.responseFlags.SUCCESS, data);;
+    
+    setImmediate(() => {
+      console.log(`setImmediate iteration: ${iteration}`);
+      step(iteration + 1); // Recursive call from setImmediate handler.
+    });
+
+    process.nextTick(() => {
+      console.log(`nextTick iteration: ${iteration}`);
+    });
+   
+  }
+  step(0);
+
+}
