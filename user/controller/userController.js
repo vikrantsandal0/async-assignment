@@ -191,6 +191,7 @@ function readFsPromisify(req, res){
   }).then(function (content) {
      let data ={
        content: content
+       
      };
      return  responses.sendCustomResponse(res, commonConfig.responseMessages.SUCCESS, commonConfig.responseFlags.SUCCESS, data);
 
