@@ -139,6 +139,9 @@ function getUserDataCoroutine(req, res) {
       message: commonConfig.responseMessages.SUCCESS,
       status: commonConfig.responseFlags.SUCCESS,
       data: userData
+
+
+
     };
 
   })().then((data) => {
@@ -175,7 +178,7 @@ function getUserDataPromise(req, res) {
 }
 
 function readFsPromisify(req, res){
-
+   console.log(req.body);
   var fs = Promise.promisifyAll(require("fs")); 
   var directory = "content";
   
@@ -191,7 +194,7 @@ function readFsPromisify(req, res){
   }).then(function (content) {
      let data ={
        content: content
-       
+
      };
      return  responses.sendCustomResponse(res, commonConfig.responseMessages.SUCCESS, commonConfig.responseFlags.SUCCESS, data);
 
