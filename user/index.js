@@ -7,4 +7,3 @@ app.post('get_data_async_await', userController.getUserDataAwait);
 app.post('get_data_promise_coroutine', userController.getUserDataCoroutine);
 app.post('get_data_promise', userController.getUserDataPromise);
 app.post('promisifyAll', userController.readFsPromisify);
-app.post('setImmediate', userController.setImmediate);
