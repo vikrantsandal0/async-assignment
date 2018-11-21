@@ -1,9 +1,9 @@
 
-var express = require('express');
- var   app = express();
+const express = require('express');
+ const   app = express();
  global.app = app;
-   var   server = require('http').createServer(app);
-   var  dba = require('./connect2.js');
+   const   server = require('http').createServer(app);
+   const  dba = require('./connect2.js');
     require('./user');
    
 let port = 2000;
