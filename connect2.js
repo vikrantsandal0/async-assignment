@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-var schema = require('./models');
+const schema = require('./models');
 
 async function connect() {
     try {

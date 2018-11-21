@@ -1,8 +1,8 @@
 
-var Promise = require('bluebird');
-var userServices = require('../services/userServices');
-var responses = require('../../config/common_response');
-var commonConfig = require('../../config/common_config');
+const Promise = require('bluebird');
+const userServices = require('../services/userServices');
+const responses = require('../../config/common_response');
+const commonConfig = require('../../config/common_config');
 
 
 
@@ -23,7 +23,7 @@ function customerSignup(req, res) {
   const phone = req.body.phone === null || req.body.phone === undefined ? '' : req.body.phone;
   let password = req.body.password === null || req.body.password === undefined ? '' : req.body.password;
   const name = req.body.name === null || req.body.name === undefined ? '' : req.body.name.trim();
-  var access_token;
+  let access_token;
 
   async.waterfall([
     function (cb) {
@@ -36,7 +36,7 @@ function customerSignup(req, res) {
     },
     function (cb) {
       access_token = md5(new Date() + email + phone);
-      var dbObject = {
+      let dbObject = {
         email: email,
         phoneNumber: phone,
         password: password,
@@ -135,7 +135,7 @@ async function getUserDataAwait(req, res) {
 function getUserDataCoroutine(req, res) {
   Promise.coroutine(function* () {
 
-    var userData = yield dba.collection('userCollection').find().sort({ userId: -1 }).toArray();
+    let userData = yield dba.collection('userCollection').find().sort({ userId: -1 }).toArray();
     return {
       message: commonConfig.responseMessages.SUCCESS,
       status: commonConfig.responseFlags.SUCCESS,
@@ -180,13 +180,13 @@ function getUserDataPromise(req, res) {
 
 function readFsPromisify(req, res){
    console.log(req.body);
-  var fs = Promise.promisifyAll(require("fs")); 
-  var directory = "content";
+  const fs = Promise.promisifyAll(require("fs")); 
+  let directory = "content";
   
-  var getFiles = function () {
+  let getFiles = function () {
       return fs.readdirAsync(directory);
   };
-  var getContent = function (filename) {
+  let getContent = function (filename) {
       return fs.readFileAsync('../../' + directory + filename, "utf8");
   };
   

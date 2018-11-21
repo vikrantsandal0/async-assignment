@@ -1,7 +1,7 @@
 
-var database = require('../../connect2');
-var responses                   = require('../../config/common_response');
-var commonConfig                = require('../../config/common_config');
+const database = require('../../connect2');
+const responses                   = require('../../config/common_response');
+const commonConfig                = require('../../config/common_config');
 
 exports.authenticateCustomer = authenticateCustomer;
 exports.insertCustomer       = insertCustomer;
@@ -9,7 +9,7 @@ exports.authenticateCustomerPromise = authenticateCustomerPromise;
 
 function authenticateCustomer(email, callback) {
 
-  var cred = dba.collection('userCollection');
+  let cred = dba.collection('userCollection');
   cred.findOne({ email: email }, (err, response) => {
     if (err) {
       callback(commonConfig.responseFlags.SERVER_ERROR, null);
@@ -26,7 +26,7 @@ function authenticateCustomer(email, callback) {
 
 function insertCustomer(obj, callback){
  
-  var cred = dba.collection('userCollection');
+  let cred = dba.collection('userCollection');
   cred.insertOne(obj,(err, result)=>{
     if (err) {
       callback(commonConfig.responseFlags.SERVER_ERROR, null);
@@ -44,7 +44,7 @@ function insertCustomer(obj, callback){
 
  function authenticateCustomerPromise(body){
    return new Promise((resolve , reject)=>{
-    var cred = dba.collection('userCollection');
+  let cred = dba.collection('userCollection');
     cred.find({ email: body.email}, (err, response) => {
       if (err) {
         reject({message:commonConfig.responseMessages.SERVER_ERROR,status:commonConfig.responseFlags.SERVER_ERROR});

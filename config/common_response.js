@@ -1,4 +1,4 @@
-var commonConfig = require("../config/common_config");
+const commonConfig = require("../config/common_config");
 
 exports.sendCustomResponse = function(res, message, status, data){
     message = message? message : commonConfig.responseMessages.SUCCESS;

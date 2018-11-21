@@ -1,4 +1,4 @@
-var userController     = require('./controller/userController');
+const userController     = require('./controller/userController');
 
 app.post('/sign_up_waterfall',                    userController.customerSignup);
 app.post('/user_login',                 userController.customerLogin);
